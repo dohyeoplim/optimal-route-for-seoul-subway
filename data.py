@@ -19,14 +19,13 @@ _RAW_LINES = {
 }
 
 lines = {}
+station_lines_temp = defaultdict(list)
 
-_station_lines = defaultdict(list)
 for line_no, stations_str in _RAW_LINES.items():
     stations = [s.strip() for s in stations_str.split('-') if s.strip()]
     lines[line_no] = stations
     for station in stations:
-        _station_lines[station].append(line_no)
+        station_lines_temp[station].append(line_no)
 
-station_lines = {st: sorted(lns) for st, lns in _station_lines.items()}
-
-transfer_map = {st: lns for st, lns in station_lines.items() if len(lns) > 1}
+station_lines = {station: sorted(line_list) for station, line_list in station_lines_temp.items()}
+transfer_map = {station: lines for station, lines in station_lines.items() if len(lines) > 1}
