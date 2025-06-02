@@ -1,30 +1,22 @@
-from typing import List, Tuple, Dict
+from typing import List, Tuple, Dict, Set
 from collections import deque
 
-def get_station_nodes(station: str, station_lines: Dict[str, List[int]],
-                       graph: Dict) -> List[Tuple[str, int, str]]:
-    nodes = []
-    lines = station_lines.get(station, [])
-
+def get_station_nodes(
+        station_name: str,
+        station_lines_map: Dict[str, Set[str]],
+        graph: Dict[Tuple[str, str], List[Tuple[Tuple[str, str], float]]]
+) -> List[Tuple[str, str]]:
+    nodes: List[Tuple[str, str]] = []
+    lines = station_lines_map.get(station_name, set())
     for line in lines:
-        for direction in ('F', 'B'):
-            node = (station, line, direction)
-            if node in graph:
-                nodes.append(node)
-
+        node = (station_name, line)
+        if node in graph:
+            nodes.append(node)
     return nodes
 
-def identify_hub_nodes(transfer_stations):
-    hub_nodes = set()
-    for station, lines in transfer_stations.items():
-        for line in lines:
-            hub_nodes.add((station, line, 'F')) # 정방향 Forward
-            hub_nodes.add((station, line, 'B')) # 역방향 Backward
-    return hub_nodes
-
 def find_direct_path(graph: Dict, edge_weights: Dict,
-                     start: Tuple[str, int, str],
-                     end: Tuple[str, int, str]) -> Tuple[float, List[Tuple[str, int, str]]]:
+                     start: Tuple[str, str, str],
+                     end: Tuple[str, str, str]) -> Tuple[float, List[Tuple[str, str, str]]]:
     if start[1] != end[1]:  # 다른 노선이면 불가
         return float('inf'), []
 

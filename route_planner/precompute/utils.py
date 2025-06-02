@@ -1,26 +1,29 @@
+import heapq
 import pickle
 from collections import defaultdict
 
-def dijkstra_from_node(graph, edge_weights, start):
-    distances = {start: 0}
-    paths = {start: [start]}
-    pq = [(0, start)]
-    visited = set()
+def dijkstra_from_node(graph, edge_weights, start_node):
+
+    distances = {start_node: 0}
+    paths = {start_node: [start_node]}
+    pq = [(0, start_node)]
 
     while pq:
-        pq.sort(key=lambda x: x[0])
-        current_dist, current = pq.pop(0)
-        if current in visited:
-            continue
-        visited.add(current)
+        curr_dist, curr_node = heapq.heappop(pq)
 
-        for neighbor in graph[current]:
-            weight = edge_weights.get((current, neighbor), float('inf'))
-            new_dist = current_dist + weight
-            if neighbor not in distances or new_dist < distances[neighbor]:
+        if curr_dist > distances.get(curr_node, float('inf')):
+            continue
+
+        for neighbor, weight in graph.get(curr_node, []):
+            edge_key = (curr_node, neighbor)
+            actual_weight = edge_weights.get(edge_key, weight)
+
+            new_dist = curr_dist + actual_weight
+
+            if new_dist < distances.get(neighbor, float('inf')):
                 distances[neighbor] = new_dist
-                paths[neighbor] = paths[current] + [neighbor]
-                pq.append((new_dist, neighbor))
+                paths[neighbor] = paths[curr_node] + [neighbor]
+                heapq.heappush(pq, (new_dist, neighbor))
 
     return distances, paths
 
