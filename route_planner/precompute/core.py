@@ -74,7 +74,7 @@ class HubPrecomputer:
                     ))
 
             reachable_hubs.sort(key=lambda x: x[1])
-            self.station_to_hubs[node] = reachable_hubs[:10]
+            self.station_to_hubs[node] = reachable_hubs
 
             node_count += 1
 
@@ -95,7 +95,7 @@ class HubPrecomputer:
 
         for node in non_hub_nodes:
             self.hubs_to_station[node].sort(key=lambda x: x[1])
-            self.hubs_to_station[node] = self.hubs_to_station[node][:10]
+            self.hubs_to_station[node] = self.hubs_to_station[node][:20]
 
         elapsed_time = time.time() - start_time
         print(f"Done. 소요 시간: {elapsed_time:.2f}초")

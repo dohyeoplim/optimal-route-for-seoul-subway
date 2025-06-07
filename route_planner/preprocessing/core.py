@@ -66,8 +66,10 @@ class GraphBuilder:
                 if (node_u, w) not in self.subway_graph[node_v]:
                     self.subway_graph[node_v].append((node_u, w))
 
-                self.station_lines_map[u].add(line_name)
-                self.station_lines_map[v].add(line_name)
+                if node_u in self.subway_graph:
+                    self.station_lines_map[u].add(line_name)
+                if node_v in self.subway_graph:
+                    self.station_lines_map[v].add(line_name)
 
         branch_connections = {
             "line_1_junction_at_guro_main": ("구로", "line_1_main"),

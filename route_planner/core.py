@@ -5,10 +5,45 @@ from route_planner.precompute.utils import save_preprocessed, load_preprocessed
 from route_planner.utils import format_route_segments
 import pprint
 
+def debug_seoul_station(builder):
+    seoul_station = "서울역"
+    debug_info = {}
+
+    # 1. Lines associated with 서울역
+    seoul_lines = builder.station_lines_map.get(seoul_station, set())
+    debug_info["lines"] = list(seoul_lines)
+
+    # 2. Nodes for 서울역 that exist in the graph
+    seoul_nodes = []
+    for line in seoul_lines:
+        node = (seoul_station, line)
+        if node in builder.subway_graph:
+            seoul_nodes.append(node)
+    debug_info["nodes_in_graph"] = seoul_nodes
+
+    # 3. Transfer edges between lines at 서울역
+    transfer_edges = []
+    for i in range(len(seoul_nodes)):
+        for j in range(i + 1, len(seoul_nodes)):
+            node1, node2 = seoul_nodes[i], seoul_nodes[j]
+            neighbors = builder.subway_graph[node1]
+            if any(n == node2 and abs(w - 2.0) < 1e-3 for n, w in neighbors):
+                transfer_edges.append((node1, node2))
+    debug_info["transfer_edges_between_lines"] = transfer_edges
+
+    # 4. Missing nodes or missing transfer edges
+    missing_nodes = [(seoul_station, line) for line in seoul_lines if (seoul_station, line) not in builder.subway_graph]
+    debug_info["missing_nodes"] = missing_nodes
+
+    return debug_info
+
+
 class RoutePlanner:
     def __init__(self, csv_path: str, transfer_time: float = 2.0):
         builder = GraphBuilder(csv_path)
         builder.build()
+
+        print(builder.station_lines_map.get("서울역"))
 
         self.graph = builder.get_graph()
         self.hub_stations = builder.get_transfer_stations()
