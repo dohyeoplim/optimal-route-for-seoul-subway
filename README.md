@@ -1,6 +1,6 @@
 # 🚇 Scalable Hub-Based Pathfinding for the Seoul Subway
 
-[![Open in Figma](https://img.shields.io/badge/Open%20in-Figma%20Slides-orange?logo=figma&logoColor=white)](https://www.figma.com/deck/5x6KgCPvpCXWInCwpLzRn1/DSA-Spring-2025-Project?node-id=1-1935&viewport=-186%2C-48%2C0.84&t=zyjp3C7K4stFfWvW-1&scaling=min-zoom&content-scaling=fixed&page-id=0%3A1)
+[![Open in Figma](https://img.shields.io/badge/Open%20in-Figma%20Slides-orange?logo=figma&logoColor=white)](https://www.figma.com/deck/5x6KgCPvpCXWInCwpLzRn1/DSA-Spring-2025-Project?node-id=176-2161&viewport=-5791%2C-804%2C0.67&t=ff2kGBWPOc37QWnp-1&scaling=min-zoom&content-scaling=fixed&page-id=0%3A1)
 
 ![25](https://github.com/user-attachments/assets/21016e95-9a99-4d86-947b-e9f7e8170802)
 
