@@ -33,7 +33,7 @@ class HubPrecomputer:
         ] = defaultdict(list)
 
     def precompute_hub_data(self):
-        print(f"허브역 {len(self.hub_stations)}개")
+        # print(f"허브역 {len(self.hub_stations)}개")
         start_time = time.time()
 
         all_nodes = set(self.graph.keys())
@@ -41,10 +41,10 @@ class HubPrecomputer:
         hub_nodes = {node for node in all_nodes if node[0] in self.hub_stations}
         non_hub_nodes = all_nodes - hub_nodes
 
-        print(f"- 허브 노드: {len(hub_nodes)}개")
-        print(f"- 일반 노드: {len(non_hub_nodes)}개")
-
-        print("1단계: 허브 간 거리 계산")
+        # print(f"- 허브 노드: {len(hub_nodes)}개")
+        # print(f"- 일반 노드: {len(non_hub_nodes)}개")
+        #
+        # print("1단계: 허브 간 거리 계산")
         hub_count = 0
         for hub_node in hub_nodes:
             distances, paths = dijkstra_from_node(self.graph, self.edge_weights, hub_node)
@@ -59,7 +59,7 @@ class HubPrecomputer:
 
             hub_count += 1
 
-        print("2단계: 일반역 → 허브역 거리 계산")
+        # print("2단계: 일반역 → 허브역 거리 계산")
         node_count = 0
         for node in non_hub_nodes:
             distances, paths = dijkstra_from_node(self.graph, self.edge_weights, node)
@@ -78,7 +78,7 @@ class HubPrecomputer:
 
             node_count += 1
 
-        print("3단계: 허브역 → 일반역 거리 계산")
+        # print("3단계: 허브역 → 일반역 거리 계산")
         hub_count = 0
         for hub_node in hub_nodes:
             distances, paths = dijkstra_from_node(self.graph, self.edge_weights, hub_node)
@@ -98,12 +98,12 @@ class HubPrecomputer:
             self.hubs_to_station[node] = self.hubs_to_station[node][:20]
 
         elapsed_time = time.time() - start_time
-        print(f"Done. 소요 시간: {elapsed_time:.2f}초")
-        print("="*50)
-
-        self._print_statistics()
-
-        print("=" * 50)
+        # print(f"Done. 소요 시간: {elapsed_time:.2f}초")
+        # print("="*50)
+        #
+        # self._print_statistics()
+        #
+        # print("=" * 50)
 
     def _print_statistics(self):
         hub_node_count = sum(1 for node in self.graph if node[0] in self.hub_stations)
