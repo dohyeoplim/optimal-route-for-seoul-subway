@@ -2,7 +2,7 @@
 
 [![Open in Figma](https://img.shields.io/badge/Open%20in-Figma%20Slides-orange?logo=figma&logoColor=white)](https://www.figma.com/deck/5x6KgCPvpCXWInCwpLzRn1/DSA-Spring-2025-Project?node-id=1-1935&viewport=-186%2C-48%2C0.84&t=zyjp3C7K4stFfWvW-1&scaling=min-zoom&content-scaling=fixed&page-id=0%3A1)
 
-![2](https://github.com/user-attachments/assets/f5666635-44ee-445e-8296-1787d51d8cba)
+![24](https://github.com/user-attachments/assets/081c5ea5-594b-425e-a4d1-37e64d6ce2b1)
 
 <br/>
 
